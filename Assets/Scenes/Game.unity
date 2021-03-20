@@ -251,7 +251,15 @@ MonoBehaviour:
   - name: GroupOfBlocks
     prefab: {fileID: 3775297468568614455, guid: 044add8dd02aa354d82ecebeb32ed549,
       type: 3}
-    sizeOfPool: 30
+    sizeOfPool: 50
+  - name: IdleEnemy
+    prefab: {fileID: 1628159395550678557, guid: 5857ebdbe955b2942ae007825dac5267,
+      type: 3}
+    sizeOfPool: 20
+  - name: MoveEnemy
+    prefab: {fileID: 3913629070165552906, guid: 4adb237449d669845bbc8de9c8fff21a,
+      type: 3}
+    sizeOfPool: 20
 --- !u!4 &546657472
 Transform:
   m_ObjectHideFlags: 0
@@ -442,7 +450,7 @@ GameObject:
   - component: {fileID: 1777668963}
   - component: {fileID: 1777668962}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distBetweenBlocks: 3
-  _maxGroupsOfBlocksOnScrene: 7
+  _maxGroupsOfBlocks: 10
 --- !u!4 &1777668963
 Transform:
   m_ObjectHideFlags: 0

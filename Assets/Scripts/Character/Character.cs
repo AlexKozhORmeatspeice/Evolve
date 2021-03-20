@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
@@ -28,7 +29,7 @@ public class Character : MonoBehaviour
     void Awake()
     {
         _levelOfRoad = 1;
-        
+        _newRoadTime = Time.time;
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _widthOfScreen = Camera.main.orthographicSize * Camera.main.aspect;
@@ -39,8 +40,7 @@ public class Character : MonoBehaviour
     void Update()
     {
         Run();
-        Debug.Log(Time.time - _newRoadTime);
-        if (Time.time - _newRoadTime >= 1.0f) //if set new road need to make delay 
+        if (Time.time - _newRoadTime >= 0.3f) //if set new road need to make delay 
         {
             Jump();
         }
@@ -76,6 +76,10 @@ public class Character : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         _isGrounded = collision.gameObject.name == "Ground";
     }
     
@@ -83,4 +87,5 @@ public class Character : MonoBehaviour
     {
         _isGrounded = collision.gameObject.name != "Ground";
     }
+
 }
