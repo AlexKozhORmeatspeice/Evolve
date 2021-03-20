@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2517c27ecad48d248ba73c6fc4f09bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 2
+  _jumpPower: 5
+  _layerMaskGround:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!61 &2850528196093695855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55,7 +60,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2850528196093695853}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: db205907392d8e34d95287c74423567d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
