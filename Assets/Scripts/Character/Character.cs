@@ -29,9 +29,14 @@ public class Character : MonoBehaviour
     public float _newRoadTime = 0.0f;
 
     public bool dead = false;
+
+    private AudioSource _audioSource;
+
+    [SerializeField] private AudioClip[] _audioClips;
     // Start is called before the first frame update
     void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         if (instance == null)
         {
             instance = this;
@@ -49,6 +54,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dead) return;
         
         Run();
         if (Time.time - _newRoadTime >= 0.3f && GameManager.instance.gameAcitve) //if set new road need to make delay 
@@ -65,6 +71,8 @@ public class Character : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && extraJump > 0)
         {
+            _audioSource.clip = _audioClips[1];
+            _audioSource.Play();
             _rigidbody.velocity = Vector2.up * _jumpPower;
             extraJump--;
         } 
@@ -101,6 +109,8 @@ public class Character : MonoBehaviour
 
     public void Kill()
     {
+        _audioSource.clip = _audioClips[0];
+        _audioSource.Play();
         dead = true;
     }
 
