@@ -19,13 +19,12 @@ public class Spawner: MonoBehaviour
     private List<GameObject> _listOfGroupBlocks;
     private List<GameObject> _listOfEnemys;
     
-    private Character _character;
+    
     // Start is called before the first frame update
     void Awake()
     {
         _listOfEnemys = new List<GameObject>();
         _listOfGroupBlocks = new List<GameObject>();
-        _character = FindObjectOfType<Character>();
         _screenHight = Camera.main.orthographicSize;
         
         SpawnBlocks();
@@ -58,8 +57,8 @@ public class Spawner: MonoBehaviour
 
             _listOfGroupBlocks[_maxGroupsOfBlocks - 1].GetComponent<BoxCollider2D>().enabled = false;
 
-            _character._newRoadTime = Time.time; //to block jumps between roads
-            _character._levelOfRoad++;
+            Character.instance._newRoadTime = Time.time; //to block jumps between roads
+            Character.instance._levelOfRoad++;
 
         }
     }

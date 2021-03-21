@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
+    public static Character instance = null;
+    
     private Vector3 direction;
     private float _widthOfScreen;
     
@@ -25,9 +27,17 @@ public class Character : MonoBehaviour
     public int LevelOfRoad => _levelOfRoad;
 
     public float _newRoadTime = 0.0f;
+
+    public bool dead = false;
     // Start is called before the first frame update
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        dead = false;        
         _levelOfRoad = 1;
         _newRoadTime = Time.time;
         _collider = GetComponent<BoxCollider2D>();
@@ -39,8 +49,9 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Run();
-        if (Time.time - _newRoadTime >= 0.3f) //if set new road need to make delay 
+        if (Time.time - _newRoadTime >= 0.3f && GameManager.instance.gameAcitve) //if set new road need to make delay 
         {
             Jump();
         }
@@ -78,7 +89,7 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Enemy>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Kill();
         }
         _isGrounded = collision.gameObject.name == "Ground";
     }
@@ -86,6 +97,11 @@ public class Character : MonoBehaviour
     void OnCollisionExit2D(Collision2D collision)
     {
         _isGrounded = collision.gameObject.name != "Ground";
+    }
+
+    public void Kill()
+    {
+        dead = true;
     }
 
 }
